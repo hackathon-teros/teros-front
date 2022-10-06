@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Papa from 'papaparse';
+import { terosService } from '../../service/TerosService';
 
 // eslint-disable-next-line import/prefer-default-export
 export function CsvUploadComponent() {
@@ -12,7 +13,7 @@ export function CsvUploadComponent() {
     setFile(e.target.files[0]);
   };
 
-  const handleOnSubmit = (e: any) => {
+  const handleOnSubmit = async (e: any) => {
     e.preventDefault();
 
     if (file) {
@@ -26,6 +27,13 @@ export function CsvUploadComponent() {
       fileReader.readAsText(file);
     }
   };
+
+  useEffect(() => {
+    (async () => {
+      const res = await terosService.postFile(data);
+      console.log(res);
+    })();
+  }, [data]);
 
   return (
     <div style={{ textAlign: 'center' }}>
