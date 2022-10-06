@@ -19,7 +19,9 @@ export function CsvUploadComponent() {
     if (file) {
       fileReader.onload = (event: any) => {
         const csvOutput = event.target.result;
-        const csvToJson = Papa.parse(csvOutput);
+        const csvToJson = Papa.parse(csvOutput, {
+          header: true,
+        });
         console.dir(csvToJson.data);
         setData(csvToJson.data);
       };
