@@ -16,6 +16,10 @@ export function CsvUploadComponent() {
   const handleClickButton = (e: any) => {
     e.preventDefault();
 
+    const token = localStorage.getItem('token');
+
+    if (!token) return;
+
     terosService
       .getData()
       .then((res) => setFetchData(res.data.data))
@@ -28,6 +32,10 @@ export function CsvUploadComponent() {
 
   const handleOnSubmit = async (e: any) => {
     e.preventDefault();
+
+    const token = localStorage.getItem('token');
+
+    if (!token) return;
 
     if (file) {
       fileReader.onload = (event: any) => {

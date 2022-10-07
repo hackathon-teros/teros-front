@@ -19,7 +19,7 @@ export function LoginModal({ isOpen, setIsOpen }: Login) {
 
   return (
     <Modal isOpen={isOpen}>
-      <ModalHeader>Modal title</ModalHeader>
+      <ModalHeader>Login</ModalHeader>
       <ModalBody>
         <input
           type='text'
