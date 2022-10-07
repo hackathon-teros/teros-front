@@ -3,7 +3,7 @@ import Papa from 'papaparse';
 import { TableCSV as Table } from '../Table/Table';
 import { terosService } from '../../service/TerosService';
 import { LoginModal } from '../LoginModal/LoginModal';
-
+import "../../styles/style.css";
 // eslint-disable-next-line import/prefer-default-export
 export function CsvUploadComponent() {
   const [file, setFile] = useState(null);
@@ -55,8 +55,8 @@ export function CsvUploadComponent() {
 
   return (
     <div style={{ textAlign: 'center' }}>
-      <h1>REACTJS CSV IMPORT EXAMPLE </h1>
-      <button onClick={() => setIsOpen(true)}>Fazer login</button>
+      <h1 className='h1'>REACTJS CSV IMPORT EXAMPLE </h1>
+      <button className='button-5' onClick={() => setIsOpen(true)}>Fazer login</button>
       <form>
         <input
           type='file'
@@ -65,7 +65,8 @@ export function CsvUploadComponent() {
           onChange={handleOnChange}
         />
 
-        <button
+        <button 
+          className='button-5'
           type='submit'
           disabled={
             localStorage.getItem('token') !== undefined && file === null
@@ -78,6 +79,7 @@ export function CsvUploadComponent() {
         </button>
 
         <button
+          className='button-5'
           disabled={!localStorage.getItem('token')}
           onClick={handleClickButton}
         >

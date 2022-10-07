@@ -18,16 +18,17 @@ export function LoginModal({ isOpen, setIsOpen }: Login) {
   };
 
   return (
-    <Modal isOpen={isOpen}>
+    <Modal className='vapor' isOpen={isOpen}>
       <ModalHeader>Login</ModalHeader>
-      <ModalBody>
-        <input
+      <ModalBody className='login'>
+        <input className='input'
           type='text'
           placeholder='Email'
           value={email}
           onChange={(event) => setEmail(event.target.value)}
         />
         <input
+          className='input'
           type='text'
           placeholder='Senha'
           value={pass}
@@ -35,10 +36,10 @@ export function LoginModal({ isOpen, setIsOpen }: Login) {
         />
       </ModalBody>
       <ModalFooter>
-        <Button color='primary' onClick={login}>
+        <Button className='button-5' color='primary' onClick={login}>
           Login
         </Button>{' '}
-        <Button color='secondary' onClick={() => setIsOpen(false)}>
+        <Button className='button-5' color='secondary' onClick={() => setIsOpen(false)}>
           Fechar
         </Button>
       </ModalFooter>
