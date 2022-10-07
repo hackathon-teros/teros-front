@@ -18,7 +18,7 @@ export function LoginModal({ isOpen, setIsOpen }: Login) {
   };
 
   return (
-    <Modal className='vapor' isOpen={isOpen}>
+    <Modal className='vapor1' isOpen={isOpen}>
       <ModalHeader>Login</ModalHeader>
       <ModalBody className='login'>
         <input className='input'
