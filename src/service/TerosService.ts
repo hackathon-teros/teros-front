@@ -15,7 +15,7 @@ class TerosService {
   }
 
   async getData() {
-    return app.get('/');
+    return app.get('/data');
   }
 }
 

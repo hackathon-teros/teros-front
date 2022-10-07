@@ -1,13 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import Papa from 'papaparse';
+import { TableCSV as Table } from '../Table/Table';
 import { terosService } from '../../service/TerosService';
 
 // eslint-disable-next-line import/prefer-default-export
 export function CsvUploadComponent() {
   const [file, setFile] = useState();
-  const [data, setData] = useState<any>();
+  const [data, setData] = useState<any[]>([]);
+  const [fetchData, setFetchData] = useState<any[]>([]);
 
   const fileReader = new FileReader();
+
+  const handleClickButton = (e: any) => {
+    e.preventDefault();
+
+    terosService
+      .getData()
+      .then((res) => setFetchData(res.data.data))
+      .catch((err) => console.error(err));
+  };
 
   const handleOnChange = (e: any) => {
     setFile(e.target.files[0]);
@@ -22,20 +33,15 @@ export function CsvUploadComponent() {
         const csvToJson = Papa.parse(csvOutput, {
           header: true,
         });
-        console.dir(csvToJson.data);
         setData(csvToJson.data);
       };
 
       fileReader.readAsText(file);
+
+      const { data: dataResponse } = await terosService.postFile(data);
+      setFetchData(dataResponse);
     }
   };
-
-  useEffect(() => {
-    (async () => {
-      const res = await terosService.postFile(data);
-      console.log(res);
-    })();
-  }, [data]);
 
   return (
     <div style={{ textAlign: 'center' }}>
@@ -56,7 +62,12 @@ export function CsvUploadComponent() {
         >
           IMPORT CSV
         </button>
+
+        <button onClick={handleClickButton}>
+          Download
+        </button>
       </form>
+      {fetchData.length > 0 && <Table tableData={fetchData} />}
     </div>
   );
 }
