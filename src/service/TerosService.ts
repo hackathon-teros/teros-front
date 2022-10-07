@@ -17,6 +17,10 @@ class TerosService {
   async getData() {
     return app.get('/data');
   }
+
+  async login(email: string, pass: string) {
+    return app.post('/login', { email, password: pass });
+  }
 }
 
 const terosService = new TerosService();
