@@ -13,6 +13,10 @@ class TerosService {
   async postFile(file: any) {
     return app.post('/', { file });
   }
+
+  async getData() {
+    return app.get('/');
+  }
 }
 
 const terosService = new TerosService();
