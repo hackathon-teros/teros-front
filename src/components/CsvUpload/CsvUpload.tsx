@@ -6,7 +6,7 @@ import { LoginModal } from '../LoginModal/LoginModal';
 
 // eslint-disable-next-line import/prefer-default-export
 export function CsvUploadComponent() {
-  const [file, setFile] = useState();
+  const [file, setFile] = useState(null);
   const [data, setData] = useState<any[]>([]);
   const [fetchData, setFetchData] = useState<any[]>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -67,6 +67,9 @@ export function CsvUploadComponent() {
 
         <button
           type='submit'
+          disabled={
+            localStorage.getItem('token') !== undefined && file === null
+          }
           onClick={(e) => {
             handleOnSubmit(e);
           }}
@@ -74,7 +77,12 @@ export function CsvUploadComponent() {
           IMPORT CSV
         </button>
 
-        <button onClick={handleClickButton}>Download</button>
+        <button
+          disabled={!localStorage.getItem('token')}
+          onClick={handleClickButton}
+        >
+          Download
+        </button>
       </form>
       {fetchData.length > 0 && <Table tableData={fetchData} />}
 
